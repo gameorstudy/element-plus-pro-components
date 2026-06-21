@@ -1,0 +1,62 @@
+---
+description: TypeScript and Vue coding standards
+globs: **/*.{ts,tsx,vue}
+alwaysApply: false
+---
+
+# TypeScript & Vue Standards
+
+## TypeScript
+
+- Strict mode enabled (`noUnusedLocals`, `noUnusedParameters`)
+- Use `import type` for type-only imports
+- Prefer interfaces over type aliases for public props
+- Use `Record<string, any>` for form data; generic `T extends DefaultRow` for table rows
+- Export instance types: `export type ProTableInstance = InstanceType<typeof ProTable>`
+
+## Vue Patterns
+
+**New components** — use `<script setup lang="ts">`:
+
+```vue
+<script setup lang="ts">
+const props = withDefaults(defineProps<MyProps>(), myDefaults)
+const emit = defineEmits(['onFinish'])
+defineExpose({ submit })
+</script>
+```
+
+**JSX/TSX** — for button groups and render helpers:
+
+```tsx
+import { defineComponent, Fragment, type PropType, type VNode } from 'vue'
+```
+
+Set `jsx: "preserve"` and `jsxImportSource: "vue"` (already in tsconfig).
+
+## Composables
+
+- Shared hooks in `packages/composables/` (e.g. `useOptions`, `useFieldValue`)
+- Component-specific hooks in `src/composables/` (e.g. `useTable`, `useForm`)
+- Return reactive state and methods; accept `props`/`emit`/`ref` as parameters
+- Use `shallowReactive` for option caches to avoid deep reactivity overhead
+
+## Utilities
+
+- Form helpers (`getValueByProp`, `deepMerge`, `setOptions`) live in `packages/utils/form.ts`
+- Support nested `prop` paths (`'a.b'`, `['a', 'b']`) and array indices in initial values
+- Do not duplicate form/path logic — extend existing utils
+
+## Element Plus Integration
+
+- Pass native EP props via `tableProps`, `paginationProps`, `formProps`, `dialogProps`
+- Pass native EP events via `tableEvents`, `dialogEvents`
+- Use `@element-plus/icons-vue` for icons in components
+- Re-export EP types in component type files when wrapping (e.g. `TableEmits<T>`)
+
+## Do Not
+
+- Add dependencies without discussion (keep Vue + Element Plus as peer-like deps)
+- Put business logic in `src/` playground — it is for demos only
+- Use Options API for new components unless extending an existing `defineComponent` file
+- Break API compatibility with element-ui-pro-components without explicit intent

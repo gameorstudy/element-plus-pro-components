@@ -1,0 +1,55 @@
+---
+description: Core project context for element-plus-pro-components
+alwaysApply: true
+---
+
+# Element Plus Pro Components
+
+Vue 3 + Element Plus port of [element-ui-pro-components](https://github.com/gameorstudy/element-ui-pro-components), inspired by Ant Design Pro Components. Provides schema-driven high-level components for forms and tables.
+
+## Tech Stack
+
+- Vue 3 (Composition API), TypeScript, Vite
+- Element Plus + `@element-plus/icons-vue`
+- Less for scoped component styles
+- Vue JSX/TSX for render functions (Submitter, CustomRender, demos)
+
+## Package Layout
+
+```
+packages/
+  components/   # ProTable, ProForm, DialogForm, EditableProTable
+  base/         # ProFormItem, CustomRender
+  composables/  # Shared hooks (useOptions, useFieldValue)
+  types/        # Shared interfaces (ProFormItemProps, RenderActions)
+  utils/        # form, debounce, breakpoints
+src/            # Dev playground only — not published API
+```
+
+## Import Alias
+
+Always import internal modules via the package alias:
+
+```ts
+import ProFormItem from 'element-plus-pro-components/packages/base/pro-form-item'
+import { useOptions } from 'element-plus-pro-components/packages/composables/useOptions'
+```
+
+Configured in `vite.config.ts` and `tsconfig.app.json` paths.
+
+## Components Roadmap
+
+| Component | Status |
+|-----------|--------|
+| ProForm | Implemented |
+| DialogForm | Implemented |
+| ProTable | Implemented |
+| EditableProTable | Planned |
+
+## Migration Notes (Vue 2 → Vue 3)
+
+- Preserve API parity with element-ui-pro-components where possible
+- Replace Element UI types/props with Element Plus equivalents
+- Use Vue 3 native `Fragment` instead of `vue-fragment`
+- No `el-table-prepend` dependency needed
+- Prefer `<script setup>` for new components; legacy `defineComponent` is acceptable in existing code

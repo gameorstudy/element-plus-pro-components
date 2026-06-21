@@ -1,0 +1,112 @@
+{
+  "name": "@rasmusxiong/element-plus-pro-components",
+  "version": "0.1.1",
+  "description": "Vue 3 + Element Plus Pro Components: ProForm, DialogForm, ProTable, EditableProTable.",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "element-plus",
+    "pro-components",
+    "vue3",
+    "pro-form",
+    "pro-table",
+    "editable-pro-table",
+    "dialog-form",
+    "schema-form"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gameorstudy/element-plus-pro-components"
+  },
+  "bugs": {
+    "url": "https://github.com/gameorstudy/element-plus-pro-components/issues"
+  },
+  "homepage": "https://gameorstudy.github.io/element-plus-pro-components/",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "volta": {
+    "node": "22.22.0"
+  },
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "build:lib": "vite build --config vite.config.lib.ts && node scripts/bundle-component-styles.mjs",
+    "prepublishOnly": "pnpm run build:lib",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "peerDependencies": {
+    "el-table-prepend-next": "^1.0.2",
+    "element-plus": "^2.13.0",
+    "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "@element-plus/icons-vue": {
+      "optional": true
+    },
+    "el-table-prepend-next": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "@rasmusxiong/element-plus-pro-components": "^0.1.1",
+    "@types/node": "^24.12.2",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "@vitejs/plugin-vue-jsx": "^5.1.5",
+    "@vue/tsconfig": "^0.9.1",
+    "el-table-prepend-next": "^1.0.2",
+    "element-plus": "^2.13.7",
+    "less": "^4.6.4",
+    "shiki": "^4.2.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.10",
+    "vite-plugin-checker": "^0.13.0",
+    "vite-plugin-dts": "^4.5.4",
+    "vitepress": "^1.6.3",
+    "vue": "^3.5.32",
+    "vue-router": "^4.6.4",
+    "vue-tsc": "^3.2.7"
+  },
+  "module": "es/index.mjs",
+  "types": "es/index.d.ts",
+  "style": "es/index.css",
+  "files": [
+    "es"
+  ],
+  "sideEffects": [
+    "es/index.css",
+    "es/**/*.css",
+    "es/components/**/style/**",
+    "es/style/**"
+  ],
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.mjs"
+    },
+    "./resolver": {
+      "types": "./es/resolver/index.d.ts",
+      "import": "./es/resolver/index.mjs"
+    },
+    "./es/index.css": "./es/index.css",
+    "./es/style/css": {
+      "import": "./es/style/css.mjs",
+      "types": "./es/style/css.d.ts"
+    },
+    "./es/locale/lang/*": {
+      "import": "./es/locale/lang/*.mjs",
+      "types": "./es/locale/lang/*.d.ts"
+    },
+    "./es/components/*/style/css": {
+      "import": "./es/components/*/style/css.mjs",
+      "types": "./es/components/*/style/css.d.ts"
+    }
+  }
+}

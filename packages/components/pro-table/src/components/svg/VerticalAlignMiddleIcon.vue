@@ -1,0 +1,29 @@
+<template>
+  <svg
+    t="1768466311335"
+    class="icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    p-id="9722"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="1em"
+    height="1em"
+    fill="currentColor"
+  >
+    <path
+      d="M512 614.4l-153.6 153.6 102.4 0 0 204.8 102.4 0 0-204.8 102.4 0L512 614.4zM665.6 256l-102.4 0L563.2 51.2 460.8 51.2l0 204.8L358.4 256l153.6 153.6L665.6 256zM921.6 512c0-28.3136-2.4576-51.2-30.72-51.2L133.12 460.8C104.8576 460.8 102.4 483.6864 102.4 512c0 28.2112 2.4576 51.2 30.72 51.2L890.88 563.2C919.1424 563.2 921.6 540.2112 921.6 512z"
+      p-id="9723"
+    />
+  </svg>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'VerticalAlignMiddleIcon'
+})
+</script>
+
+<style scoped></style>

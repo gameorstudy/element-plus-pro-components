@@ -1,0 +1,83 @@
+---
+description: Component structure and development conventions
+globs: packages/components/**/*,packages/base/**/*
+alwaysApply: false
+---
+
+# Component Development
+
+## Directory Structure
+
+Each component lives under `packages/components/{kebab-name}/`:
+
+```
+{component-name}/
+  index.ts              # default export + .install + type re-exports
+  src/
+    index.vue           # root SFC
+    {component}.ts      # props/emits interfaces (ProTableProps, etc.)
+    defaults.ts         # Options API prop definitions (when using defineComponent)
+    composables/        # component-specific hooks
+    components/         # sub-components and svg icons
+```
+
+Base building blocks go in `packages/base/` with the same `index.ts` + `src/` layout.
+
+## Entry File Pattern
+
+```ts
+import type { App } from 'vue'
+import MyComponent from './src/index.vue'
+
+MyComponent.install = (app: App) => {
+  app.component(MyComponent.name as string, MyComponent)
+}
+
+export default MyComponent
+export * from './src/my-component'
+export type MyComponentInstance = InstanceType<typeof MyComponent>
+```
+
+## SFC Conventions
+
+- Root component `name` must match export (e.g. `'ProTable'`, `'ProForm'`)
+- CSS classes use BEM: `.pro-table__form`, `.pro-table__toolbar`
+- Styles: `<style lang="less" scoped>`
+- Template comments mark sections: `<!-- Search form -->`, `<!-- start -->` / `<!-- end -->`
+- Expose imperative API via `defineExpose` or `expose()` in setup
+
+## Props Definition
+
+Two patterns coexist — match the surrounding component:
+
+**Script setup** (preferred for new work):
+
+```ts
+const props = withDefaults(defineProps<ProFormProps>(), proFormPropsDefaults)
+```
+
+**defineComponent** (ProTable):
+
+```ts
+// defaults.ts — PropType definitions with JSDoc
+// pro-table.ts — TypeScript interfaces
+// index.vue — props: defaultProps
+```
+
+Keep interface (`pro-*.ts`) and runtime props (`defaults.ts`) in sync.
+
+## Sub-components
+
+- Place in `src/components/`; use PascalCase filenames (`ColumnSettings.vue`)
+- SVG icons in `src/components/svg/`
+- JSX render components as `.tsx` (e.g. `Submitter.tsx`)
+
+## Custom Rendering
+
+Use `CustomRender` from `packages/base/custom-render` for VNode/JSX render props:
+
+```vue
+<CustomRender :render="() => formItem.renderField?.({ form, formItem })" />
+```
+
+Never inline render functions directly in templates.
